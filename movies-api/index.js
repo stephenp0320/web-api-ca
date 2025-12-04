@@ -3,7 +3,6 @@ import express from 'express';
 import './db';
 import cors from 'cors';
 import usersRouter from './api/users';
-import authenticate from './authenticate';
 
 
 dotenv.config();
