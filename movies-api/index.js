@@ -3,11 +3,12 @@ import express from 'express';
 import './db';
 import cors from 'cors';
 import usersRouter from './api/users';
+import moviesRouter from './api/movies';   
 
 
 dotenv.config();
 
-const errHandler = (err, req, res) => {
+const errHandler = (err, req, res, next) => {
   if(process.env.NODE_ENV === 'production') {
     return res.status(500).send(`Something went wrong!`);
   }
@@ -28,6 +29,7 @@ app.use(errHandler);
 
 app.use('/api/users', usersRouter);
 
+app.use('/api/movies', moviesRouter); 
 
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
