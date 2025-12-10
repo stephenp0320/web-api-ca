@@ -8,7 +8,7 @@ const handleTmdbResponce = async (response) => {
         const errorData = await response.json();
         throw new Error(errorData.status_message || 'TMDB API error');    }
     return await response.json();
-}
+};
 
 export const getMovies = async () => {
     const response = await fetch(
