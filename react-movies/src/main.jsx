@@ -21,6 +21,11 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import WatchlistPage from "./pages/watchlistPage";
 
+import LoginPage from "./pages/loginPage";
+import SignupPage from "./pages/signupPage";
+import StartPage from "./pages/startPage";
+import ProfilePage from "./pages/profilePage";
+import ProtectedRoutes from "./protectedRoutes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,7 +45,34 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <SiteHeader />
+        <MoviesContextProvider>
+            <SiteHeader />
+            <Routes>
+              <Route path="/" element={<StartPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/movies" element={<HomePage />} />
+                <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+                <Route path="/movies/:id/reviews" element={<MovieReviewPage />} />
+                <Route path="/movies/:id" element={<MoviePage />} />
+                <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+                <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+                <Route path="/movies/popular" element={<PopularMoviesPage />} />
+                <Route path="/movies/tv" element={<TvPage />} />
+                <Route path="/movies/air" element={<OnAirPage />} />
+                <Route
+                  path="/movies/:id/recommendations"
+                  element={<RecommendationsPage />}
+                />
+                <Route path="/movies/nowplaying" element={<NowPlaying />} />
+                <Route path="/watchlist/movies" element={<WatchlistPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+              </Route>
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </MoviesContextProvider>
+          {/* <SiteHeader />
           <MoviesContextProvider>
             <Routes>
               <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
@@ -57,7 +89,7 @@ const App = () => {
               <Route path="/movies/nowplaying" element={<NowPlaying />} />
               <Route path="/watchlist/movies" element={<WatchlistPage />} />
             </Routes>
-          </MoviesContextProvider>
+          </MoviesContextProvider> */}
         </BrowserRouter>
         <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>

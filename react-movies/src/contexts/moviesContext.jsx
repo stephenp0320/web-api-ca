@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { login, signup } from "../api/tmdb-api";
 
 export const MoviesContext = React.createContext(null);
 
@@ -8,6 +9,34 @@ const MoviesContextProvider = (props) => {
   const [mustWatch, setMustWatch] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
 
+  const existingToken = localStorage.getItem("token");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authToken, setAuthToken] = useState(existingToken); //eslint-disable-line
+  const [userName, setUserName] = useState("");
+
+
+  const setToken = (data) => {
+    localStorage.setItem("token", data);
+    setAuthToken(data);
+  }
+
+  const authenticate = async (username, password) => {
+    const result = await login(username, password);
+    if (result.token){
+      setToken(result.token)
+      setIsAuthenticated(true);
+      setUserName(username);
+    }
+  };
+
+  const register = async (username, password) => {
+    const result = await signup(username, password);
+    return result.success;
+  }
+
+  const signout = () => {
+    setTimeout(() => setIsAuthenticated(false), 100)
+  }
 
   const addToFavorites = (movie) => {
     let newFavorites = [];
@@ -69,6 +98,11 @@ const MoviesContextProvider = (props) => {
         watchlist,
         addToWatchlist,
         removeFromWatchlist,
+        isAuthenticated,
+        authenticate,
+        register,
+        signout,
+        userName
       }}
     >
       {props.children}
