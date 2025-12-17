@@ -39,9 +39,26 @@ async function registerUser(req, res) {
             msg: 'Weak password. Must be 8+ chars, include a letter, a number, and a special character.'
         });
     }
-
-    await User.create(req.body);
-    res.status(201).json({ success: true, msg: 'User successfully created.' });
+    try {
+        await User.create(req.body);
+        return res.status(201).json({
+          success: true,
+          msg: 'User successfully created.',
+        });
+      } catch (error) {
+        if (error.code === 11000) {
+          return res.status(409).json({
+            success: false,
+            msg: 'Username already exists.',
+          });
+        }
+    
+        console.error(error);
+        return res.status(500).json({
+          success: false,
+          msg: 'User registration failed.',
+        });
+      }
 }
 
 async function authenticateUser(req, res) {
