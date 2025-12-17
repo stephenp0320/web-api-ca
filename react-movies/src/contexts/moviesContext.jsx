@@ -35,7 +35,9 @@ const MoviesContextProvider = (props) => {
   }
 
   const signout = () => {
+    localStorage.removeItem("token")
     setTimeout(() => setIsAuthenticated(false), 100)
+    setUserName("")
   }
 
   const addToFavorites = (movie) => {

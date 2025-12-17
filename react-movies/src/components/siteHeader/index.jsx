@@ -11,12 +11,15 @@ import { useNavigate } from "react-router";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useContext } from "react";
+import { MoviesContext } from "../../contexts/moviesContext";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
 const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [movieMenuAnchor, setMovieMenuAnchor] = useState(null);
+  const { isAuthenticated, signout } = useContext(MoviesContext);
 
   const open = Boolean(anchorEl);
 
@@ -136,6 +139,16 @@ const SiteHeader = () => {
                   </MenuItem>
                 ))}
               </Menu>
+
+              {isAuthenticated && (
+                <Button
+                  color="inherit"
+                  onClick={signout}
+                  sx={{ ml: 2 }}
+                >
+                  Logout
+                </Button>
+              )}
             </>
           )}
         </Toolbar>
