@@ -18,23 +18,11 @@ const SignUpPage = () => {
         console.log("passwordAgain:", passwordAgain);
         console.log("validPassword:", validPassword);
 
-        if (!validPassword) {
-            console.log("not a valid password")
+        if (validPassword && password === passwordAgain) {
+            let result = await context.register(userName, password);
+            console.log("register result:", result);
+            setRegistered(result);
         }
-
-        if (password != passwordAgain) {
-            console.log("passwords do not match")
-        }
-
-        let result = await context.register(userName, password);
-        console.log("register result:", result);
-        setRegistered(result);
-
-        // if (validPassword && password === passwordAgain) {
-        //     let result = await context.register(userName, password);
-        //     console.log("register result:", result);
-        //     setRegistered(result);
-        // }
     }
 
     if (registered === true) {

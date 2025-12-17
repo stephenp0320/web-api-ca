@@ -7,7 +7,7 @@ const StartPage = () => {
   
     return context.isAuthenticated ? (
         <p>
-            Welcome {context.userName}! View your <Link to="/tasks">Tasks</Link> or your <Link to="/profile">Profile</Link>.
+            Welcome {context.userName}! View your <Link to="/movies">Movies</Link> or your <Link to="/profile">Profile</Link>.
         </p>
     ) : (
         <p>
