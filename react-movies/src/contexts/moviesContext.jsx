@@ -10,7 +10,7 @@ const MoviesContextProvider = (props) => {
   const [watchlist, setWatchlist] = useState([]);
 
   const existingToken = localStorage.getItem("token");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!existingToken);
   const [authToken, setAuthToken] = useState(existingToken); //eslint-disable-line
   const [userName, setUserName] = useState("");
 
