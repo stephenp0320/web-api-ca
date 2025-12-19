@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router";
 import { MoviesContext } from '../contexts/moviesContext';
+import { Box, Paper, Typography, TextField, Button, Stack, Alert } from "@mui/material";
 
 const SignUpPage = () => {
     const context = useContext(MoviesContext)
