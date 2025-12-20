@@ -1,4 +1,8 @@
 
+const authHeader = () => ({
+  Authorization: localStorage.getItem("token"), // returns JWT token
+});
+
 export const getMovies = () => {
   return fetch(
     `http://localhost:8080/api/movies/discover`
@@ -359,5 +363,42 @@ export const signup = async (username, password) => {
       body: JSON.stringify({ username: username, password: password })
   });
   return response.json();
+};
+
+
+export const getUserWatchlist = async () => {
+  const responce = await fetch("http://localhost:8080/api/watchlist", {
+    headers: authHeader(),
+  });
+  if (!responce.ok) {
+    throw new Error("Failed to fetch the watchlist");
+  }
+  return responce.json();
+};
+
+export const addUserWatchlist = async (movieId) => {
+  const response = await fetch("http://localhost:8080/api/watchlist", {
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeader(),
+    },
+    method: "post",
+    body: JSON.stringify({ movieId }),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to add to watchlist");
+  }
+  return response.json();
+};
+
+export const removeUserWatchlist = async (movieId) => {
+  const response = await fetch(`http://localhost:8080/api/watchlist/${movieId}`, {
+      method: "delete",
+      headers: authHeader(),
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Failed to remove from watchlist");
+  }
 };
 
