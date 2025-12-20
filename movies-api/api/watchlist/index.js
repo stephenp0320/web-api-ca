@@ -13,13 +13,13 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', asyncHandler(async (req, res) => {
-    const { movieID } = req.body;
-    if (!movieID) {
+    const { movieId } = req.body;
+    if (!movieId) {
         return res.status(400).json({ success: false, msg: 'MovieID required.' });
     }
     const created = await Watchlist.create({
-        username: req.body.username,
-        movieID,
+        username: req.user.username,
+        movieId,
     });
     res.status(201).json({ success: true, item: created });
 })

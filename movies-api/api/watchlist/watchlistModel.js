@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const WatchlistSchema = new Schema({
-    username: { type: String, unique: true, required: true },
-    password: { type: String, required: true },
+    username: { type: String, required: true, index: true },
+    movieId: { type: Number, required: true },
 },
 {timestamps: true}
 );

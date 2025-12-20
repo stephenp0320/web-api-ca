@@ -13,7 +13,7 @@ UserSchema.methods.comparePassword = async function (passw) {
 };
 
 UserSchema.statics.findByUserName = function (username) {
-  return this.findOne({ username: username });
+  return this.findOne({ username });
 };
 
 UserSchema.pre('save', async function() {
