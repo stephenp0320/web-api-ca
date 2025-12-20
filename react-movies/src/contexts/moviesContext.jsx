@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { login, signup } from "../api/tmdb-api";
 
 export const MoviesContext = React.createContext(null);
+// authenticated state for the movie context
+export const useAuth = () => {
+  return useContext(MoviesContext);
+};
 
 const MoviesContextProvider = (props) => {
   const [favorites, setFavorites] = useState([])

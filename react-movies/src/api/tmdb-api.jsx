@@ -402,3 +402,46 @@ export const removeUserWatchlist = async (movieId) => {
   }
 };
 
+export const addRecentlyViewed = (movieId) => {
+  return fetch(
+    "http://localhost:8080/api/recently-viewed",
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        ...authHeader(),
+      },
+      body: JSON.stringify({ movieId }),
+    }
+  ).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.msg || "Failed to add recently viewed movie");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
+export const getRecentlyViewed = () => {
+  return fetch(
+    "http://localhost:8080/api/recently-viewed",
+    {
+      headers: authHeader(),
+    }
+  ).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.msg || "Failed to fetch recently viewed movies");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
