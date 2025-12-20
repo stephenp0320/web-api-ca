@@ -5,7 +5,7 @@ import cors from 'cors';
 import usersRouter from './api/users';
 import moviesRouter from './api/movies';   
 import watchlistRouter from './api/watchlist';
-
+import recentlyViewedRouter from "./api/recentlyViewed";
 
 dotenv.config();
 
@@ -20,6 +20,8 @@ app.use('/api/users', usersRouter);
 app.use('/api/movies', moviesRouter);
 
 app.use("/api/watchlist", watchlistRouter);
+
+app.use("/api/recently-viewed", recentlyViewedRouter);
 
 const errHandler = (err, req, res, next) => {
   if(process.env.NODE_ENV === 'production') {
