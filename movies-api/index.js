@@ -4,6 +4,7 @@ import './db';
 import cors from 'cors';
 import usersRouter from './api/users';
 import moviesRouter from './api/movies';   
+import watchlistRouter from './api/watchlist';
 
 
 dotenv.config();
@@ -17,6 +18,8 @@ app.use(express.json());
 app.use('/api/users', usersRouter);
 
 app.use('/api/movies', moviesRouter);
+
+app.use("/api/watchlist", watchlistRouter);
 
 const errHandler = (err, req, res, next) => {
   if(process.env.NODE_ENV === 'production') {
