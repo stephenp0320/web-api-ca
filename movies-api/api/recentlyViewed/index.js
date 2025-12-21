@@ -7,10 +7,13 @@ const router = express.Router(); // protects routes
 router.use(authenticate);
 
 //this returns the users movies that were recently reviewed
+// https://mongoosejs.com/docs/queries.html
 router.get("/", asyncHandler(async (req, res) => {
-      const items = await RecentlyViewed.find({ username: req.user.username })
+    const limit = Number(req.query.limit) || 10; // limits the queries, cleaner
+    const items = await RecentlyViewed.find({ username: req.user.username })
         .sort({ viewedAt: -1 })
-        .limit(10);
+        .limit(limit)
+        .lean();
       res.status(200).json(items);
     })
   );
