@@ -1,8 +1,4 @@
 
-const authHeader = () => ({
-  Authorization: localStorage.getItem("token"), // returns JWT token
-});
-
 export const getMovies = () => {
   return fetch(
     `http://localhost:8080/api/movies/discover`
@@ -365,6 +361,16 @@ export const signup = async (username, password) => {
   return response.json();
 };
 
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+const authHeader = () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return {};
+  }
+  return {
+    Authorization: token,
+  };
+};
 
 export const getUserWatchlist = async () => {
   const responce = await fetch("http://localhost:8080/api/watchlist", {
