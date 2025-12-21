@@ -11,9 +11,9 @@ router.use(authenticate);
 router.get("/", asyncHandler(async (req, res) => {
     const limit = Number(req.query.limit) || 10; // limits the queries, cleaner
     const items = await RecentlyViewed.find({ username: req.user.username })
-        .sort({ viewedAt: -1 })
+        .sort({ viewedAt: -1 }) // newest first
         .limit(limit)
-        .lean();
+        .lean(); // plain js objects for better performance
     res.status(200).json(items);
 })
 );

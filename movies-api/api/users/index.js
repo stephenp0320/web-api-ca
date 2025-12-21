@@ -29,7 +29,8 @@ router.post('/', asyncHandler(async (req, res) => {
     }
 }));
 
-
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch
+// error handling improved
 async function registerUser(req, res) {
     const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
