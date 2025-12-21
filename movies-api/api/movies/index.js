@@ -67,11 +67,11 @@ router.get('/upcoming', asyncHandler(async (req, res) => {
 }));
 
 router.get('/:id', asyncHandler(async (req, res) => {
-    const get_single_movie = await getMovie();
-    res.status(200).json(get_single_movie);
+    const movie = await getMovie(req.params.id);
+    res.status(200).json(movie);
 }));
 
-router.get('/:id', asyncHandler(async (req, res) => {
+router.get('/:id/keywords', asyncHandler(async (req, res) => {
     const keyword = await getKeyword(req.params.id);
     res.status(200).json(keyword);
 }));
