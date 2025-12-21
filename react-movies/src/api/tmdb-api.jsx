@@ -37,7 +37,7 @@ export const getKeyword = ({ queryKey }) => {
   const [, idPart] = queryKey;
   const { id } = idPart;
   return fetch(
-    
+
     `http://localhost:8080/api/movies/${id}/keywords`
   ).then((response) => {
     if (!response.ok) {
@@ -245,7 +245,7 @@ export const getAlternativeTitles = ({ queryKey }) => {
 export const getUpcomingMovies = (page = 1) => {
   return fetch(
     `http://localhost:8080/api/movies/upcoming?page=${page}`
-    ).then((responce) => {
+  ).then((responce) => {
     if (!responce.ok) {
       return responce.json().then((error) => {
         throw new Error(error.status_message);
@@ -322,8 +322,8 @@ export const getRecommendations = (id, page = 1) => {
   //error handling added here
   if (!id) throw new Error("issue with movie id");
   return fetch(
-      `http://localhost:8080/api/movies/${id}/recommendations?page=${page}`  
-    ).then((response) => {
+    `http://localhost:8080/api/movies/${id}/recommendations?page=${page}`
+  ).then((response) => {
     if (!response.ok) {
       return response.json().then((error) => {
         throw new Error(error.status_message || "Something went wrong");
@@ -341,22 +341,22 @@ export const getRecommendations = (id, page = 1) => {
 
 export const login = async (username, password) => {
   const response = await fetch('http://localhost:8080/api/users', {
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({ username: username, password: password })
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify({ username: username, password: password })
   });
   return response.json();
 };
 
 export const signup = async (username, password) => {
   const response = await fetch('http://localhost:8080/api/users?action=register', {
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({ username: username, password: password })
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    body: JSON.stringify({ username: username, password: password })
   });
   return response.json();
 };
@@ -399,9 +399,9 @@ export const addUserWatchlist = async (movieId) => {
 
 export const removeUserWatchlist = async (movieId) => {
   const response = await fetch(`http://localhost:8080/api/watchlist/${movieId}`, {
-      method: "delete",
-      headers: authHeader(),
-    }
+    method: "delete",
+    headers: authHeader(),
+  }
   );
   if (!response.ok) {
     throw new Error("Failed to remove from watchlist");
@@ -420,13 +420,13 @@ export const addRecentlyViewed = (movieId) => {
       body: JSON.stringify({ movieId }),
     }
   ).then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.msg || "Failed to add recently viewed movie");
-        });
-      }
-      return response.json();
-    })
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.msg || "Failed to add recently viewed movie");
+      });
+    }
+    return response.json();
+  })
     .catch((error) => {
       throw error;
     });
@@ -440,13 +440,13 @@ export const getRecentlyViewed = () => {
       headers: authHeader(),
     }
   ).then((response) => {
-      if (!response.ok) {
-        return response.json().then((error) => {
-          throw new Error(error.msg || "Failed to fetch recently viewed movies");
-        });
-      }
-      return response.json();
-    })
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.msg || "Failed to fetch recently viewed movies");
+      });
+    }
+    return response.json();
+  })
     .catch((error) => {
       throw error;
     });

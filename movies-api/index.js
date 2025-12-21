@@ -3,7 +3,7 @@ import express from 'express';
 import './db';
 import cors from 'cors';
 import usersRouter from './api/users';
-import moviesRouter from './api/movies';   
+import moviesRouter from './api/movies';
 import watchlistRouter from './api/watchlist';
 import recentlyViewedRouter from "./api/recentlyViewed";
 
@@ -24,13 +24,13 @@ app.use("/api/watchlist", watchlistRouter);
 app.use("/api/recently-viewed", recentlyViewedRouter);
 
 const errHandler = (err, req, res, next) => {
-  if(process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production') {
     return res.status(500).send(`Something went wrong!`);
   }
   res.status(500).send(`Hey!! You caught the error. Here's the details: ${err.stack} `);
 };
 app.use(errHandler);
- 
+
 const port = process.env.PORT;
 app.listen(port, () => {
   console.info(`Server running at ${port}`);

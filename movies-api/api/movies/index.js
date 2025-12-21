@@ -19,7 +19,7 @@ import {
     getRecommendations,
     getTv,
     getOnAir
-  } from '../tmdb-api.js';
+} from '../tmdb-api.js';
 
 const router = express.Router();
 
@@ -32,17 +32,17 @@ router.get('/discover', asyncHandler(async (req, res) => {
 router.get('/genres', asyncHandler(async (req, res) => {
     const genres = await getGenres();
     res.status(200).json(genres);
-  }));
+}));
 
 router.get('/tv/genres', asyncHandler(async (req, res) => {
-   const tv_genres = await getTvGenres();
-   res.status(200).json(tv_genres);
-  }));
+    const tv_genres = await getTvGenres();
+    res.status(200).json(tv_genres);
+}));
 
 router.get('/tv/discover', asyncHandler(async (req, res) => {
-   const tv_discover = await getTv();
-   res.status(200).json(tv_discover);
-  }));
+    const tv_discover = await getTv();
+    res.status(200).json(tv_discover);
+}));
 
 router.get('/tv/on_the_air', asyncHandler(async (req, res) => {
     const on_air = await getOnAir();
